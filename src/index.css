@@ -1,5 +1,7 @@
 :root {
-  --main-color: rgb(194, 194, 214);
+  --background-color: rgb(194, 194, 214);
+  --operation-btn: rgb(66, 66, 66);
+  --btn-hover: rgb(70, 70, 70);
 }
 
 html {
@@ -26,7 +28,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--main-color);
+  background-color: var(--background-color);
   min-height: 100vh;
   font-weight: 400;
 }
@@ -39,20 +41,76 @@ body {
   border-radius: 30px;
   overflow: hidden;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.func-btns {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 10px;
+  padding: 5px;
+}
+
+.func-btns button {
+  height: 13px;
+  width: 13px;
+  margin: 3px;
+  border-radius: 50%;
+  border: none;
+}
+
+.func-btns .close {
+  background-color: rgb(191, 68, 37);
+}
+.func-btns .change-color {
+  background-color: rgb(233, 203, 38);
+}
+.func-btns .info {
+  background-color: rgb(95, 153, 51);
 }
 
 .displays {
   height: 150px;
+  align-items: center;
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  padding: 0px 15px;
+  overflow: hidden;
 }
 
 .upper-display {
-  background-color: aqua;
+  /* background-color: aqua; */
+  overflow: hidden;
+  grid-row: 1/3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 30px;
+  color: rgb(89, 85, 78);
 }
 .lower-display {
-  background-color: antiquewhite;
-  grid-row: 2/4;
+  overflow: hidden;
+  font-size: 50px;
+  /* background-color: antiquewhite; */
+  grid-row: 3/6;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.line {
+  height: 1px;
+  background: rgb(47, 83, 163);
+  background: linear-gradient(
+    40deg,
+    rgb(38, 68, 133) 0%,
+    rgb(115, 54, 93) 50%,
+    rgb(6, 114, 107) 100%
+  );
+  border-radius: 10%;
 }
 
 .numpad {
@@ -82,18 +140,24 @@ body {
   cursor: pointer;
   border-radius: 40px;
   background-color: transparent;
+  transition: transform 0.15s ease-in-out;
 }
 
 .numpad .operation-btn {
-  background-color: rgb(175, 175, 175);
+  background-color: var(--operation-btn);
 }
 
 .numpad button:hover {
-  background-color: rgb(126, 126, 126);
+  background-color: var(--btn-hover);
+  box-shadow: 0px 0px 3px rgb(122, 122, 122);
+  transform: scale(1.1);
 }
 
 .numpad .num-AC:nth-child(1) :hover {
   background-color: rgb(160, 10, 10);
+  transition: 10;
+  height: 95%;
+  width: 95%;
 }
 
 .numpad .num-AC {
@@ -111,5 +175,5 @@ body {
 }
 
 .operation-btn.equal:hover {
-  background-color: rgba(123, 255, 160, 0.629);
+  background-color: rgba(32, 65, 41, 0.827);
 }
