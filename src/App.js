@@ -65,6 +65,10 @@ function App() {
   };
 
   const handleEqual = () => {
+    if (/[+*/-]$/.test(mathExpression)) {
+      setMathExpression(mathExpression.concat("0"));
+      return;
+    }
     setResult(calculateResult());
     setMathExpression("");
     setMathValue("");
