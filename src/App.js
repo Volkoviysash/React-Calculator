@@ -16,8 +16,8 @@ function App() {
       return;
     }
     setResult("");
-    setMathExpression(mathExpression.concat(event.target.value));
     setMathValue(mathValue.concat(event.target.value));
+    setMathExpression(mathExpression.concat(event.target.value));
   };
 
   const operationHandleClick = (event) => {
@@ -33,11 +33,12 @@ function App() {
     setMathValue("");
   };
 
-  const dividerHandleClick = (event) => {
+  const dividerHandleClick = () => {
     if (mathValue.includes(divider)) {
       return;
     }
     setMathValue(mathValue.concat(divider));
+    setMathExpression(mathExpression.concat(divider));
   };
 
   const clearDisplay = () => {
