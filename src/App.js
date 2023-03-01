@@ -21,12 +21,23 @@ function App() {
   };
 
   const operationHandleClick = (event) => {
-    if (mathExpression.length < 1 && !/^[+-]$/.test(event.target.value)) {
-      return;
-    }
-    if (operations.includes(mathExpression[mathExpression.length - 1])) {
-      setMathExpression(mathExpression.slice(0, -1).concat(event.target.value));
-      return;
+    if (mathExpression.length < 1 && /[+-]/.test(event.target.value)) return;
+    if (/[+*/-]$/.test(mathExpression)) {
+      if (/[+*/]-$/.test(mathExpression)) return;
+      if (event.target.value == "-") {
+        if (/-$/.test(mathExpression)) {
+          setMathExpression(mathExpression.slice(0, -1).concat("+"));
+          return;
+        }
+        setResult("");
+        setMathExpression(mathExpression.concat(event.target.value));
+        setMathValue("");
+      } else {
+        setMathExpression(
+          mathExpression.slice(0, -1).concat(event.target.value)
+        );
+        return;
+      }
     }
     setResult("");
     setMathExpression(mathExpression.concat(event.target.value));
