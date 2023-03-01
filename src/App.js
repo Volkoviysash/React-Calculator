@@ -4,7 +4,8 @@ function App() {
   const MaxDigits = 12;
   const MaxDecimalPart = MaxDigits / 2;
   const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const operations = ["+", "-", "/", "*", "."];
+  const operations = ["+", "-", "/", "*"];
+  const divider = ".";
 
   const [result, setResult] = useState("");
   const [mathExpression, setMathExpression] = useState("");
@@ -32,10 +33,23 @@ function App() {
     setMathValue("");
   };
 
+  const dividerHandleClick = (event) => {
+    if (mathValue.includes(divider)) {
+      return;
+    }
+    setMathValue(mathValue.concat(divider));
+  };
+
   const clearDisplay = () => {
-    setMathExpression("");
-    setResult("");
-    setMathValue("");
+    if (mathValue) {
+      setMathExpression(
+        mathExpression.slice(0, mathExpression.lastIndexOf(mathValue))
+      );
+      setMathValue("");
+    } else {
+      setMathExpression("");
+      setResult("");
+    }
   };
 
   const handleEqual = () => {
@@ -74,19 +88,25 @@ function App() {
         </div>
         <div className="displays">
           <div className="upper-display">{mathExpression}</div>
-          <div className="lower-display">
+          <div id="display" className="lower-display">
             {result ? result : mathValue ? mathValue : "0"}
           </div>
         </div>
         <div className="line"></div>
         <div className="numpad">
           <div className="operation num-AC">
-            <button value="AC" onClick={clearDisplay} className="operation-btn">
+            <button
+              id="clear"
+              value="AC"
+              onClick={clearDisplay}
+              className="operation-btn"
+            >
               AC
             </button>
           </div>
           <div className="operation">
             <button
+              id="divide"
               value="/"
               onClick={operationHandleClick}
               className="operation-btn"
@@ -96,6 +116,7 @@ function App() {
           </div>
           <div className="operation">
             <button
+              id="multiply"
               value="*"
               onClick={operationHandleClick}
               className="operation-btn"
@@ -104,22 +125,23 @@ function App() {
             </button>
           </div>
           <div className="">
-            <button value="7" onClick={numberHandleClick}>
+            <button id="seven" value="7" onClick={numberHandleClick}>
               7
             </button>
           </div>
           <div className="">
-            <button value="8" onClick={numberHandleClick}>
+            <button id="eight" value="8" onClick={numberHandleClick}>
               8
             </button>
           </div>
           <div className="">
-            <button value="9" onClick={numberHandleClick}>
+            <button id="nine" value="9" onClick={numberHandleClick}>
               9
             </button>
           </div>
           <div className="operation">
             <button
+              id="subtract"
               value="-"
               onClick={operationHandleClick}
               className="operation-btn"
@@ -128,22 +150,23 @@ function App() {
             </button>
           </div>
           <div className="">
-            <button value="4" onClick={numberHandleClick}>
+            <button id="four" value="4" onClick={numberHandleClick}>
               4
             </button>
           </div>
           <div className="">
-            <button value="5" onClick={numberHandleClick}>
+            <button id="five" value="5" onClick={numberHandleClick}>
               5
             </button>
           </div>
           <div className="">
-            <button value="6" onClick={numberHandleClick}>
+            <button id="six" value="6" onClick={numberHandleClick}>
               6
             </button>
           </div>
           <div className="operation">
             <button
+              id="add"
               value="+"
               onClick={operationHandleClick}
               className="operation-btn"
@@ -152,32 +175,33 @@ function App() {
             </button>
           </div>
           <div className="">
-            <button value="1" onClick={numberHandleClick}>
+            <button id="one" value="1" onClick={numberHandleClick}>
               1
             </button>
           </div>
           <div className="">
-            <button value="2" onClick={numberHandleClick}>
+            <button id="two" value="2" onClick={numberHandleClick}>
               2
             </button>
           </div>
           <div className="">
-            <button value="3" onClick={numberHandleClick}>
+            <button id="three" value="3" onClick={numberHandleClick}>
               3
             </button>
           </div>
           <div className="num-zero">
-            <button value="0" onClick={numberHandleClick}>
+            <button id="zero" value="0" onClick={numberHandleClick}>
               0
             </button>
           </div>
           <div className="">
-            <button value="." onClick={operationHandleClick}>
+            <button id="decimal" value="." onClick={dividerHandleClick}>
               .
             </button>
           </div>
           <div className="operation equal">
             <button
+              id="equals"
               value="="
               onClick={handleEqual}
               className="operation-btn equal"
