@@ -21,26 +21,30 @@ function App() {
   };
 
   const operationHandleClick = (event) => {
-    if (mathExpression.length < 1 && /[+-]/.test(event.target.value)) return;
+    const operator = event.target.value;
+    if (result) {
+      setMathExpression(result.toString().concat(operator));
+      setResult("");
+      setMathValue("");
+    }
+    if (mathExpression.length < 1 && /[+-]/.test(operator)) return;
+    if (/[+*/]-$/.test(mathExpression)) return;
     if (/[+*/-]$/.test(mathExpression)) {
-      if (/[+*/]-$/.test(mathExpression)) return;
-      if (event.target.value == "-") {
+      if (operator == "-") {
         if (/-$/.test(mathExpression)) {
           setMathExpression(mathExpression.slice(0, -1).concat("+"));
           return;
         }
         setResult("");
-        setMathExpression(mathExpression.concat(event.target.value));
+        setMathExpression(mathExpression.concat(operator));
         setMathValue("");
       } else {
-        setMathExpression(
-          mathExpression.slice(0, -1).concat(event.target.value)
-        );
+        setMathExpression(mathExpression.slice(0, -1).concat(operator));
         return;
       }
     }
     setResult("");
-    setMathExpression(mathExpression.concat(event.target.value));
+    setMathExpression(mathExpression.concat(operator));
     setMathValue("");
   };
 
